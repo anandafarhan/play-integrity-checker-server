@@ -3,20 +3,25 @@ const playintegrity = google.playintegrity('v1');
 
 
 const packageName = process.env.PACKAGE_NAME
-const privatekey = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+// const privatekey = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 
 
 async function getTokenResponse(token) {
     
     console.log(token)
 
-    let jwtClient = new google.auth.JWT(
-        privatekey.client_email,
-        null,
-        privatekey.private_key,
-        ['https://www.googleapis.com/auth/playintegrity']);
+//     let jwtClient = new google.auth.JWT(
+//         privatekey.client_email,
+//         null,
+//         privatekey.private_key,
+//         ['https://www.googleapis.com/auth/playintegrity']);
+    
+    const googleAuth = new google.auth.GoogleAuth({
+            keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH,
+            scopes: ['https://www.googleapis.com/auth/playintegrity'],
+        });
 
-    google.options({ auth: jwtClient });
+    google.options({ auth: googleAuth });
 
     const res = await playintegrity.v1.decodeIntegrityToken(
         {
