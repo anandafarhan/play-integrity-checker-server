@@ -3,15 +3,19 @@ const playintegrity = google.playintegrity('v1');
 
 
 const packageName = process.env.PACKAGE_NAME
-const privatekey = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 
 
 async function getTokenResponse(token) {
+    
+    console.log('=============================================')
+    console.log(token)
+    console.log('=============================================')
+    
 
     let jwtClient = new google.auth.JWT(
-        privatekey.client_email,
+        process.env.CLIENT_EMAIL,
         null,
-        privatekey.private_key,
+        process.env.PRIVATE_KEY,
         ['https://www.googleapis.com/auth/playintegrity']);
 
     google.options({ auth: jwtClient });
