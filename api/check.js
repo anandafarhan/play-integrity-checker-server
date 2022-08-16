@@ -4,7 +4,7 @@ const playintegrity = google.playintegrity('v1');
 const packageName = process.env.PACKAGE_NAME;
 const clientEmail = process.env.CLIENT_EMAIL;
 const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH;
-const privateKey = process.env.PRIVATE_KEY;
+const privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
 const scopes = ['https://www.googleapis.com/auth/playintegrity'];
 // const privatekey = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 
